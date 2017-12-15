@@ -15,6 +15,19 @@ Auth::routes();
 
 Route::get('/', 'SurveyController@home')->name('home');
 
+Route::get('/audit/new', 'AuditController@newAudit')->name('audit.new');
+Route::get('/audit/{audit}', 'auditController@detailAudit')->name('detail.audit');
+Route::get('/audit/view/{audit}', 'AuditController@index')->name('view.survey');
+Route::get('/audit/answers/{audit}', 'AuditController@viewAuditAnswers')->name('view.audit.answers');
+Route::get('/audit/{audit}/delete', 'AuditController@deleteAudit')->name('delete.audit');
+Route::get('/audit/{audit}/edit', 'AuditController@edit')->name('edit.survey');
+Route::patch('/audit/{audit}/update', 'AuditController@update')->name('update.audit');
+Route::post('/audit/view/{audit}/completed', 'AnswerController@store')->name('complete.audit');
+Route::post('/audit/create', 'AuditController@create')->name('create.audit');
+
+Route::get('/company/new', 'CompanyController@create')->name('new.company');
+Route::get('/company/view/{audit}', 'CompanyController@index')->name('view.company');
+
 Route::get('/survey/new', 'SurveyController@newSurvey')->name('new.survey');
 Route::get('/survey/{survey}', 'SurveyController@detailSurvey')->name('detail.survey');
 Route::get('/survey/view/{survey}', 'SurveyController@viewSurvey')->name('view.survey');
