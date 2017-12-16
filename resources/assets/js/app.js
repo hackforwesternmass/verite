@@ -20,3 +20,13 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+
+// Defaults for select2
+var defaults = {
+    width: '256px',
+    theme: 'bootstrap'
+};
+
+// Apply select2 js to elements with select2 css class.
+$('.select2').select2(defaults);

@@ -12,6 +12,16 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+@import "node_modules/select2/dist/css/select2.min";
+@import "node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min";
+
+body {
+  margin: 6px;
+  div.row {
+    margin: 8px;
+  }
+}
+
 .verite-content {
   min-height: 477px;
 }

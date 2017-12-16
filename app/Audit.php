@@ -13,5 +13,4 @@ class Audit extends Model
     {
         return $this->hasOne(Company::class);
     }
-
 }

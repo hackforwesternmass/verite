@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use App\Audit;
 use Auth;
 
@@ -31,7 +32,13 @@ class AuditController extends Controller
      */
     public function newAudit()
     {
-        return view('audit.new');
+        $countries = Config::get('constants.countries');
+        return view('audit.new')
+            ->with(
+                [
+                    'countries' => $countries,
+                ]
+            );
     }
 
     public function create(Request $request, Audit $audit)
@@ -97,5 +104,4 @@ class AuditController extends Controller
     {
         //
     }
-
 }
