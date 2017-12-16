@@ -32,3 +32,7 @@ To compile sass:
 ```bash
 lando npm run dev
 ```
+
+```bash
+lando gulp
+```

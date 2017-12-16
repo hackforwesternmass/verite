@@ -11,12 +11,14 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
-   .scripts([
-      // './node_modules/jquery/dist/jquery.min.js',
-      // './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
-      // './node_modules/jquery-ui-dist/jquery-ui.min.js',
-      './node_modules/select2/dist/js/select2.min.js',
-      // './node_modules/chart.js/dist/Chart.js'
-    ]);
+mix
+    .autoload({
+       'jquery': ['window.$', 'window.jQuery']
+    })
+    .js(
+        [
+            'resources/assets/js/app.js',
+        ],
+        'public/js'
+    )
+    .sass('resources/assets/sass/app.scss', 'public/css');
