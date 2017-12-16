@@ -28,11 +28,6 @@ This will start the app and pull in the `node` and `php` dependencies automatica
 
 ### Theming
 
-To compile sass:
 ```bash
-lando npm run dev
-```
-
-```bash
-lando gulp
+lando gulp || lando gulp watch
 ```
