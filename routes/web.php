@@ -20,13 +20,18 @@ Route::get('/audit/{audit}', 'auditController@detailAudit')->name('detail.audit'
 Route::get('/audit/view/{audit}', 'AuditController@index')->name('view.survey');
 Route::get('/audit/answers/{audit}', 'AuditController@viewAuditAnswers')->name('view.audit.answers');
 Route::get('/audit/{audit}/delete', 'AuditController@deleteAudit')->name('delete.audit');
-Route::get('/audit/{audit}/edit', 'AuditController@edit')->name('edit.survey');
+Route::get('/audit/{audit}/edit', 'AuditController@edit')->name('edit.audit');
 Route::patch('/audit/{audit}/update', 'AuditController@update')->name('update.audit');
 Route::post('/audit/view/{audit}/completed', 'AnswerController@store')->name('complete.audit');
 Route::post('/audit/create', 'AuditController@create')->name('create.audit');
 
-Route::get('/company/new', 'CompanyController@create')->name('new.company');
-Route::get('/company/view/{audit}', 'CompanyController@index')->name('view.company');
+Route::get('/companies', 'CompanyController@list')->name('list.companies');
+Route::get('/company/new', 'CompanyController@newCompany')->name('company.new');
+Route::post('/company/create', 'CompanyController@create')->name('create.company');
+Route::get('/company/{company}', 'CompanyController@index')->name('view.company');
+Route::get('/company/{company}/delete', 'CompanyController@deleteCompany')->name('delete.company');
+Route::get('/company/{company}/edit', 'CompanyController@edit')->name('edit.company');
+Route::patch('/company/{company}/update', 'CompanyController@update')->name('update.company');
 
 Route::get('/survey/new', 'SurveyController@newSurvey')->name('new.survey');
 Route::get('/survey/{survey}', 'SurveyController@detailSurvey')->name('detail.survey');

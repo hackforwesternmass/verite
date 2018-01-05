@@ -73,8 +73,9 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <content>
+            @yield('content')
+        </content>
     </div>
     @include('footer')
 </body>

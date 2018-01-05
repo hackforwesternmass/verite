@@ -17,13 +17,18 @@
 
 body {
   margin: 6px;
+
   div.row {
     margin: 8px;
   }
   .datepicker,
   .input-field {
     width: 256px;
-    margin: 8px;
+  }
+
+  content {
+    display: block;
+    margin: 0 4%;
   }
 }
 

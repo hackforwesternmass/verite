@@ -7,50 +7,47 @@
       <form method="POST" action="create" id="boolean">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
-          <div class="input-field col s12">
-              {{ Form::label('date', 'Company: ') }}
-              {{
-                  Form::text(
-                    'company',
-                    null,
-                    array(
-                      'class' => 'form-control',
-                      'size' => '10',
-                    )
-                  )
-              }}
-          </div>
+          {{ Form::label('company', 'Company: ') }}
+          {{ Form::select(
+              'company', 
+              $companies,
+              [], 
+              [
+                'class' => 'form-control select2', 
+              ]
+            ) 
+          }}
+        </div>
+        <div class="row">
           {{ Form::label('country', 'Country: ') }}
           {{
-              Form::select(
-                  'country',
-                  $countries,
-                  [],
-                  [
-                      'class' => 'form-control select2',
-
-                  ]
-              )
+            Form::select(
+                'country',
+                $countries,
+                [],
+                [
+                    'class' => 'form-control select2',
+                ]
+            )
           }}
-          <div class="input-field col s12">
-            {{ Form::label('date', 'Date of the Audit: ') }}
-            {{
-              Form::text(
-                'date',
-                null,
-                array(
-                  'class' => 'form-control datepicker',
-                  'size' => '10',
-                )
-              )
-            }}
-          </div>
-          <br /><br />
-          <div class="input-field col s12">
-          <button class="btn btn-primary">Submit</button>
-          </div>
         </div>
-        </form>
+        <div class="row">
+          {{ Form::label('date', 'Date of the Audit: ') }}
+          {{
+            Form::text(
+              'date',
+              null,
+              array(
+                'class' => 'form-control datepicker',
+                'size' => '10',
+              )
+            )
+          }}
+        </div>
+        <div class="row">
+          <button class="btn btn-primary">Submit</button>
+        </div>  
+      </form>
     </div>
   </div>
   <script>

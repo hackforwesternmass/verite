@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Company;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CompanyController extends Controller
 {
@@ -11,14 +12,26 @@ class CompanyController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
-     * Display a listing of the resource.
+     *  List all the companies.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function list(Request $request) 
+    {
+        $companies = Company::get();
+        return view('company.list', compact('companies'));
+    }
+
+    /**
+     * Display a company.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Company $company)
     {
-        //
+        return view('company.view', compact('company'));
     }
 
     /**
@@ -26,64 +39,33 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+    public function newCompany()
     {
-        //
+        return view('company.new');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function create(Request $request, Company $company)
     {
-        //
+        $arr = $request->all();
+        $companyItem = $company->create($arr);
+        return Redirect::to("/company/{$companyItem->id}");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function edit(Company $company)
     {
-        //
+        return view('company.edit', compact('company'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Request $request, Company $company)
     {
-        //
+        $company->update($request->only(['name']));
+        return Redirect::to("/company/{$company->id}");
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function deleteCompany(Company $company)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $company->delete();
+        return redirect('');
     }
 }

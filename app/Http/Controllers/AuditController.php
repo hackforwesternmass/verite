@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use App\Audit;
+use App\Company;
 use Auth;
 
 class AuditController extends Controller
@@ -32,11 +33,13 @@ class AuditController extends Controller
      */
     public function newAudit()
     {
+        $companies = Company::orderBy('name')->pluck('name')->toArray();
         $countries = Config::get('constants.countries');
         return view('audit.new')
             ->with(
                 [
                     'countries' => $countries,
+                    'companies' => $companies
                 ]
             );
     }
