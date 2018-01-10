@@ -1,14 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="card">
-      <div class="card-content">
-      <span class="card-title"> Company:</span>
-      <p>
-        <span class="flow-text">{{ $company->name }}</span>
-            {{ link_to_route('edit.company', 'Edit', ['id'=>$company->id])}}
-      </p>
-    </div>
-  </div>
-  {{ link_to_route('list.companies', 'Back') }}
+  <h1>Company:</h1>
+  <div>{{ $company->name }}</div>
+  {{ link_to_route('edit.company', 'Edit', ['id'=>$company->id], array('class' => 'btn btn-primary'))}}
+  {{ link_to_route('list.companies', 'Back', array(), array('class' => 'btn btn-default')) }}
 @stop

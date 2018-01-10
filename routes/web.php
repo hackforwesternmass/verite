@@ -25,7 +25,7 @@ Route::patch('/audit/{audit}/update', 'AuditController@update')->name('update.au
 Route::post('/audit/create', 'AuditController@create')->name('create.audit');
 
 Route::get('/companies', 'CompanyController@list')->name('list.companies');
-Route::get('/company/new', 'CompanyController@newCompany')->name('company.new');
+Route::get('/company/new', 'CompanyController@newCompany')->name('new.company');
 Route::post('/company/create', 'CompanyController@create')->name('create.company');
 Route::get('/company/{company}', 'CompanyController@index')->name('view.company');
 Route::get('/company/{company}/delete', 'CompanyController@deleteCompany')->name('delete.company');
