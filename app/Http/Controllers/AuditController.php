@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Redirect;
 use App\Audit;
 use App\Company;
 use Auth;
@@ -15,15 +16,25 @@ class AuditController extends Controller
         $this->middleware('auth');
     }
 
+    public function list(Request $request) 
+    {
+        $audits = Audit::get();
+        $companies = Company::get();
+        $countries = Config::get('constants.countries');
+        return view('audit.list', compact('audits', 'companies', 'countries'));
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Audit $audit)
     {
         #$audits = Audit::get();
-        return view('audit', compact('audits'));
+        $company = Company::find($audit->company_id);
+        $country = Config::get('constants.countries')[$audit->country];
+        return view('audit.view', compact('audit', 'company', 'country'));
     }
 
     /**
@@ -33,7 +44,7 @@ class AuditController extends Controller
      */
     public function newAudit()
     {
-        $companies = Company::orderBy('name')->pluck('name')->toArray();
+        $companies = Company::orderBy('name')->pluck('name', 'id')->toArray();
         $countries = Config::get('constants.countries');
         return view('audit.new')
             ->with(
@@ -47,31 +58,9 @@ class AuditController extends Controller
     public function create(Request $request, Audit $audit)
     {
         $arr = $request->all();
-        $arr['date'] = date('Y-m-d H:i:s', strtotime(str_replace('-', '/', time())));
+        $arr['date'] = date('Y-m-d H:i:s', strtotime(str_replace('-', '/', $arr['date'])));
         $auditItem = $audit->create($arr);
         return Redirect::to("/audit/{$auditItem->id}");
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -80,21 +69,21 @@ class AuditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Audit $audit)
     {
-        //
+        $company = Company::find($audit->company_id);
+        $country = Config::get('constants.countries')[$audit->country];
+        $companies = Company::orderBy('name')->pluck('name', 'id')->toArray();
+        $countries = Config::get('constants.countries');
+        return view('audit.edit', compact('audit', 'company', 'country', 'companies', 'countries'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Audit $audit)
     {
-        //
+        $arr = $request->all();
+        $arr['date'] = date('Y-m-d H:i:s', strtotime(str_replace('-', '/', $arr['date'])));
+        $audit->update($arr);
+        return Redirect::to("/audit/{$audit->id}");
     }
 
     /**

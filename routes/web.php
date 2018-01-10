@@ -13,16 +13,15 @@
 
 Auth::routes();
 
-Route::get('/', 'SurveyController@home')->name('home');
+#Route::get('/', 'SurveyController@home')->name('home');
+Route::redirect('/', '/audits', 301);
 
-Route::get('/audit/new', 'AuditController@newAudit')->name('audit.new');
-Route::get('/audit/{audit}', 'auditController@detailAudit')->name('detail.audit');
-Route::get('/audit/view/{audit}', 'AuditController@index')->name('view.survey');
-Route::get('/audit/answers/{audit}', 'AuditController@viewAuditAnswers')->name('view.audit.answers');
+Route::get('/audits', 'AuditController@list')->name('list.audits');
+Route::get('/audit/new', 'AuditController@newAudit')->name('new.audit');
+Route::get('/audit/{audit}', 'AuditController@index')->name('view.audit');
 Route::get('/audit/{audit}/delete', 'AuditController@deleteAudit')->name('delete.audit');
 Route::get('/audit/{audit}/edit', 'AuditController@edit')->name('edit.audit');
 Route::patch('/audit/{audit}/update', 'AuditController@update')->name('update.audit');
-Route::post('/audit/view/{audit}/completed', 'AnswerController@store')->name('complete.audit');
 Route::post('/audit/create', 'AuditController@create')->name('create.audit');
 
 Route::get('/companies', 'CompanyController@list')->name('list.companies');

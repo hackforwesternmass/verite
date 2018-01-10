@@ -7,9 +7,9 @@
       <form method="POST" action="create" id="boolean">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
-          {{ Form::label('company', 'Company: ') }}
+          {{ Form::label('company_id', 'Company: ') }}
           {{ Form::select(
-              'company', 
+              'company_id', 
               $companies,
               [], 
               [
@@ -46,6 +46,7 @@
         </div>
         <div class="row">
           <button class="btn btn-primary">Submit</button>
+          <a class="btn btn-default" href="{{ URL::previous() }}">Cancel</a>
         </div>  
       </form>
     </div>
