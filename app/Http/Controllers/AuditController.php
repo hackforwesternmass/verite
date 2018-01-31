@@ -16,7 +16,7 @@ class AuditController extends Controller
         $this->middleware('auth');
     }
 
-    public function list(Request $request) 
+    public function list(Request $request)
     {
         $audits = Audit::get();
         $companies = Company::get();

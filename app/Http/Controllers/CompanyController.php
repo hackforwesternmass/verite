@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Company;
 use Auth;
 use Illuminate\Http\Request;
@@ -15,10 +16,10 @@ class CompanyController extends Controller
 
     /**
      *  List all the companies.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function list(Request $request) 
+    public function list(Request $request)
     {
         $companies = Company::get();
         return view('company.list', compact('companies'));
